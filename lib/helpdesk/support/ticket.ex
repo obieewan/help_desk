@@ -15,9 +15,8 @@ defmodule Helpdesk.Support.Ticket do
     # Add a string type attribute called `:subject`
     attribute :subject, :string do
       # Don't allow `nil` values
-      allow_ni? false
+      allow_nil? false
     end
-  end
 
   # status is either `open` or `closed`. We can add more statuses later
   attribute :status, :atom do
@@ -33,6 +32,8 @@ defmodule Helpdesk.Support.Ticket do
 
     # We also don't want status to ever be `nil`
     allow_nil? false
+  end
+
   end
 
   create :open do
