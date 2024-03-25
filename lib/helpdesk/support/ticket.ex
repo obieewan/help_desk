@@ -5,6 +5,12 @@ defmodule Helpdesk.Support.Ticket do
   actions do
     # Add a set of simple actions. You'll customize these later.
     defaults [:create, :read, :update, :destroy]
+
+    create :open do
+      # By default you can provide all public attributes to an action
+      # This action should only accept the subject
+      accept [:subject]
+    end
   end
 
   # Attributes are the simple pieces of data that exist on your resource
@@ -18,27 +24,20 @@ defmodule Helpdesk.Support.Ticket do
       allow_nil? false
     end
 
-  # status is either `open` or `closed`. We can add more statuses later
-  attribute :status, :atom do
-    # Constraints allow you to provide extra rules for the value.
-    # The available constraints depend on the type
-    # See the documentation for each type to know what constraints are available
-    # Since atoms are generally only used when we know all of the values
-    # it provides a `one_of` constraint, that only allows those values
-    constraints [one_of: [:open, :closed]]
+    # status is either `open` or `closed`. We can add more statuses later
+    attribute :status, :atom do
+      # Constraints allow you to provide extra rules for the value.
+      # The available constraints depend on the type
+      # See the documentation for each type to know what constraints are available
+      # Since atoms are generally only used when we know all of the values
+      # it provides a `one_of` constraint, that only allows those values
+      constraints [one_of: [:open, :closed]]
 
-    # The status defaulting to open makes sense
-    default :open
+      # The status defaulting to open makes sense
+      default :open
 
-    # We also don't want status to ever be `nil`
-    allow_nil? false
-  end
-
-  end
-
-  create :open do
-    # By default you can provide all public attributes to an action
-    # This action should only accept the subject
-    accept [:subject]
+      # We also don't want status to ever be `nil`
+      allow_nil? false
+    end
   end
 end
