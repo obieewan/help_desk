@@ -14,12 +14,12 @@ defmodule Helpdesk.Support.Ticket do
 
     # Add a string type attribute called `:subject`
     attribute :subject, :string do
- # Don't allow `nil` values
+      # Don't allow `nil` values
       allow_ni? false
-      end
+    end
   end
 
- # status is either `open` or `closed`. We can add more statuses later
+  # status is either `open` or `closed`. We can add more statuses later
   attribute :status, :atom do
     # Constraints allow you to provide extra rules for the value.
     # The available constraints depend on the type
@@ -33,5 +33,11 @@ defmodule Helpdesk.Support.Ticket do
 
     # We also don't want status to ever be `nil`
     allow_nil? false
+  end
+
+  create :open do
+    # By default you can provide all public attributes to an action
+    # This action should only accept the subject
+    accept [:subject]
   end
 end
